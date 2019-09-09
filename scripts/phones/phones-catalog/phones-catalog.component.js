@@ -1,12 +1,20 @@
 import {BaseComponent} from "../../shared/componets/base.component.js";
 
-export class PhonesCatalogComponent  extends BaseComponent {
+export class PhonesCatalogComponent extends BaseComponent {
     constructor({element, phones, onPhoneSelect, addToBasket}) {
         super({element});
         this._phones = phones;
         this._onPhoneSelect = onPhoneSelect;
         this._addToBasket = addToBasket;
         this._render();
+        // this._element.querySelector('.phone').addEventListener('click', (e) => {
+        //     let phoneEl = e.target;
+        //     return this._onPhoneSelect(phoneEl.dataset.phoneId);
+        // });
+        // this._element.querySelector('.addToCart').addEventListener('click', (e) => {
+        //     let toCart = e.target;
+        //     return this._addToBasket(toCart.dataset.phoneId);
+        // });
         this._element.addEventListener('click', (e) => {
             let phoneEl = e.target.closest('.phone');
             let toCart = e.target.closest('.addToCart');   // TODO else dont work
@@ -14,7 +22,7 @@ export class PhonesCatalogComponent  extends BaseComponent {
                 return this._onPhoneSelect(phoneEl.dataset.phoneId);
             }
             if (toCart) {
-                return this._addToBasket(phoneEl.dataset.phoneId);
+                return this._addToBasket(toCart.dataset.phoneId);
             }
 
         })

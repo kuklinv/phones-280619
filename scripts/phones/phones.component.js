@@ -52,10 +52,10 @@ export class PhonesComponent {
     _initFilter() {
         this._filter = new FilterComponent({
             element: this._element.querySelector('.filter'),
-            search: () => {
+            search: (searchEl) => {
 
             },
-            change: () => {
+            change: (changeEl) => {
 
             }
         });
