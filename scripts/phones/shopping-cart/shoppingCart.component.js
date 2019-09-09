@@ -19,6 +19,9 @@ export class ShoppingCartComponent extends BaseComponent {
             }
             this._render();
         });
+        this._element.querySelector('.removeall').addEventListener('click', (e) => {  // TODO not work
+            return Object.keys(this.basket).forEach(function(key) { delete object[key]; });
+        });
     }
 
     add(phoneid) {                        // TODO wtf add?
@@ -43,7 +46,7 @@ export class ShoppingCartComponent extends BaseComponent {
 
     _render() {
         this._element.innerHTML = `
-            <p>Shopping Cart</p>
+            <p>Shopping Cart    <i class="fas fa-shopping-basket"></i></p>
                 <ul class="inCart">
                 ${Object.entries(this.basket).map(([phoneid, count]) => `
                 <li>${phoneid} : ${count}</li>
