@@ -159,11 +159,12 @@ export const PhonesService = new class {
     getAll({text, orderBy} = {}) {
         // http
         const searchedPhones = this._filter(mockPhones, text);
-        return searchedPhones;
-    }   
+        const sortedPhones = this._sort(searchedPhones, orderBy);
+        return sortedPhones;
+    }
 
     getOneById(id) {
-        return  mockPhones.find((item) => item.id === id);
+        return mockPhones.find((item) => item.id === id);
     }
 
     _filter(phones, text) {
@@ -171,5 +172,23 @@ export const PhonesService = new class {
             return [...phones];
         }
         return [...phones].filter((phone) => phone.name.toLowerCase().includes(text.toLowerCase()));
+    }
+
+    _sort(phones, orderBy) {
+        const p = [...phones];
+        if (!orderBy) {
+            return p
+        }
+        p.sort((p1, p2) => {
+            if (p1[orderBy] > p2[orderBy]) {
+                return 1;
+            }
+            if (p1[orderBy] < p2[orderBy]) {
+                return -1
+            }
+            return 0;
+        });
+
+        return p
     }
 };
