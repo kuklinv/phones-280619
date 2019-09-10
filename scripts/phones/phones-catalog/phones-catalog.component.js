@@ -1,4 +1,7 @@
 import {BaseComponent} from "../../shared/componets/base.component.js";
+import {PhonesService} from "../phones.service.js";
+
+export const phones = PhonesService.getAll();
 
 export class PhonesCatalogComponent extends BaseComponent {
     constructor({element, onPhoneSelect, addToBasket}) {
@@ -24,7 +27,7 @@ export class PhonesCatalogComponent extends BaseComponent {
         super.show();
     }
 
-    _render() {                                      // TODO фонов нет потому что еще не доделана сортировка
+    _render() {                                      // TODO НЕ ВИДИТ что за THIS._PHONES!
         this._element.innerHTML = `
                     <ul class="phones">
                  ${this._phones.map((phone) => `                              

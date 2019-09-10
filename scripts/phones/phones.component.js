@@ -27,7 +27,7 @@ export class PhonesComponent {
                 this._shoppingCart.add(phoneid);
             }
         });
-        this._catalog.show(PhonesService.getAll())
+        this._showFilteredPhones();
     }
 
     _initDetails() {
@@ -53,17 +53,20 @@ export class PhonesComponent {
         this._filter = new FilterComponent({
             element: this._element.querySelector('.filter'),
             search: (text) => {
-                console.log(text);
-                this._catalog.show(PhonesService.getAll({text}));
+                this.text = text;
+                this._showFilteredPhones();
             },
-            change: (changeEl) => {
-                console.log(changeEl)
-                this._catalog.show(PhonesService.getAll());
+            change: (orderBy) => {
+                this.orderBy = orderBy;
+                this._showFilteredPhones();
             }
         });
     }
 
-
+    _showFilteredPhones() {
+        const phones = PhonesService.getAll({text: this.text, orderBy: this.orderBy});
+        this._catalog.show(phones)
+    }
     _render() {
         this._element.innerHTML = `
             <div class="row">

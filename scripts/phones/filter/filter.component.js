@@ -13,9 +13,9 @@ export class FilterComponent extends BaseComponent{
             return;
         });
         this._element.querySelector('.sort').addEventListener('change', (e) => {
-            let changeEl = e.target.value;
+            let orderBy = e.target.value;
             // console.log(changeEl);
-            this._change(changeEl);
+            this._change(orderBy);
             return;
         });
     }
