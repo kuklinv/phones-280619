@@ -1,20 +1,11 @@
 import {BaseComponent} from "../../shared/componets/base.component.js";
 
 export class PhonesCatalogComponent extends BaseComponent {
-    constructor({element, phones, onPhoneSelect, addToBasket}) {
+    constructor({element, onPhoneSelect, addToBasket}) {
         super({element});
-        this._phones = phones;
+        this._phones = [];                             // TODO теперь не будет работать кнопка назад в частности
         this._onPhoneSelect = onPhoneSelect;
         this._addToBasket = addToBasket;
-        this._render();
-        // this._element.querySelector('.phone').addEventListener('click', (e) => {
-        //     let phoneEl = e.target;
-        //     return this._onPhoneSelect(phoneEl.dataset.phoneId);
-        // });
-        // this._element.querySelector('.addToCart').addEventListener('click', (e) => {
-        //     let toCart = e.target;
-        //     return this._addToBasket(toCart.dataset.phoneId);
-        // });
         this._element.addEventListener('click', (e) => {
             let phoneEl = e.target.closest('.phone');
             let toCart = e.target.closest('.addToCart');   // TODO else dont work
@@ -27,11 +18,16 @@ export class PhonesCatalogComponent extends BaseComponent {
 
         })
     }
+    show(phones) {
+        this._phones = phones;
+        this._render();
+        super.show();
+    }
 
-    _render() {
+    _render() {                                      // TODO фонов нет потому что еще не доделана сортировка
         this._element.innerHTML = `
                     <ul class="phones">
-                 ${this._phones.map((phone) => `
+                 ${this._phones.map((phone) => `                              
                <li class="thumbnail phone" data-phone-id=${phone.id}>
                     <a href="#!/phones/${phone.id}" class="thumb">
                         <img alt="${phone.name}" src="${phone.imageUrl}">

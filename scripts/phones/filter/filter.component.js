@@ -7,9 +7,9 @@ export class FilterComponent extends BaseComponent{
         this._change = change;
         this._render();
         this._element.querySelector('.search').addEventListener('input', (e) => {
-            let searchEl = e.target.value;
+            let text = e.target.value;
             // console.log(searchEl);
-            this._search(searchEl);
+            this._search(text);
             return;
         });
         this._element.querySelector('.sort').addEventListener('change', (e) => {
