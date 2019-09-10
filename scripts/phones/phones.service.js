@@ -156,12 +156,20 @@ const mockPhones = [
 
 
 export const PhonesService = new class {
-    getAll() {
+    getAll({text, orderBy} = {}) {
         // http
-        return mockPhones;
+        const searchedPhones = this._filter(mockPhones, text);
+        return searchedPhones;
     }   
 
     getOneById(id) {
         return  mockPhones.find((item) => item.id === id);
+    }
+
+    _filter(phones, text) {
+        if (!text) {
+            return [...phones];
+        }
+        return [...phones].filter((phone) => phone.name.toLowerCase().includes(text.toLowerCase()));
     }
 };

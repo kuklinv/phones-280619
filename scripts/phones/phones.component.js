@@ -18,7 +18,6 @@ export class PhonesComponent {
     _initCatalog() {
         this._catalog = new PhonesCatalogComponent({
             element: this._element.querySelector('.phones-catalog'),
-            phones: PhonesService.getAll(),
             onPhoneSelect: (phoneid) => {
                 const phonesDetails = PhonesService.getOneById(phoneid);
                 this._catalog.hide();
@@ -28,6 +27,7 @@ export class PhonesComponent {
                 this._shoppingCart.add(phoneid);
             }
         });
+        this._catalog.show(PhonesService.getAll())
     }
 
     _initDetails() {
@@ -52,11 +52,13 @@ export class PhonesComponent {
     _initFilter() {
         this._filter = new FilterComponent({
             element: this._element.querySelector('.filter'),
-            search: (searchEl) => {
-
+            search: (text) => {
+                console.log(text);
+                this._catalog.show(PhonesService.getAll({text}));
             },
             change: (changeEl) => {
-
+                console.log(changeEl)
+                this._catalog.show(PhonesService.getAll());
             }
         });
     }
