@@ -64,8 +64,8 @@ export class PhonesComponent {
     }
 
     _showFilteredPhones() {
-        const phones = PhonesService.getAll({text: this.text, orderBy: this.orderBy});
-        this._catalog.show(phones)
+        PhonesService.getAll({text: this.text, orderBy: this.orderBy})
+          .then(phones => this._catalog.show(phones));
     }
     _render() {
         this._element.innerHTML = `
