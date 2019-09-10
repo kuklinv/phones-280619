@@ -159,8 +159,7 @@ export const PhonesService = new class {
     getAll({text, orderBy} = {}) {
         // http
         const searchedPhones = this._filter(mockPhones, text);
-        const sortedPhones = this._sort(searchedPhones, orderBy);
-        return sortedPhones;
+        return this._sort(searchedPhones, orderBy);
     }
 
     getOneById(id) {

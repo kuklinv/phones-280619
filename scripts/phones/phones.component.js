@@ -34,7 +34,7 @@ export class PhonesComponent {
         this._details = new PhoneDetailsComponent({
             element: this._element.querySelector('.phone-details'),
             backButtonSelect: () => {
-                this._catalog.show();
+                this._showFilteredPhones();
                 this._details.hide();
             },
             addToBasket: (phoneid) => {
