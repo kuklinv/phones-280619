@@ -158,8 +158,13 @@ const mockPhones = [
 export const PhonesService = new class {
     getAll({text, orderBy} = {}) {
         // http
-        const searchedPhones = this._filter(mockPhones, text);
-        return this._sort(searchedPhones, orderBy);
+        return new Promise(((resolve, reject) => {
+            const searchedPhones = this._filter(mockPhones, text);
+            const sortedPhones = this._sort(searchedPhones, orderBy);
+            resolve(sortedPhones);
+        }));
+
+        return;
     }
 
     getOneById(id) {
